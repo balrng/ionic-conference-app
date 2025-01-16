@@ -1,16 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <!-- <ion-menu-button></ion-menu-button> -->
     </ion-buttons>
 
-    <ion-title>Login</ion-title>
+    <ion-title>TWMS Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="login-logo">
-    <img src="assets/img/appicon.svg" alt="Ionic logo">
+    <img src="assets/img/logo.png" alt="Logo"> 
+    
   </div>
 
   <div class="login-form">
@@ -53,3 +54,53 @@
   </div>
 
 </ion-content>
+
+
+<!-- 
+<ion-content class="login-page">
+  <div class="login-container">
+    <div class="left-section">
+      <div class="logo-section">
+        <h1>Al-Rakeen Temperature & Humidity Monitoring System</h1>
+        <p>Keeping warehouses under control</p>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <div class="form-section">
+        <h2>Welcome Back !</h2>
+        
+
+        
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <ion-item>
+            <ion-label position="floating">Username</ion-label>
+            <ion-input type="text" formControlName="userName" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password" required></ion-input>
+          </ion-item>
+
+
+          <ion-item lines="none">
+            <ion-checkbox formControlName="rememberMe" slot="start"></ion-checkbox>
+            <ion-label>Remember Me</ion-label>
+          </ion-item>
+          <div *ngIf="errorMsg" class="error-message">
+            {{ errorMsg }}
+          </div>
+
+          
+          <ion-button type="submit" expand="block" [disabled]="!loginForm.valid">Sign In</ion-button>
+
+        </form>
+
+        <ion-text color="medium" class="forgot-password">
+          
+        </ion-text>
+      </div>
+    </div>
+  </div>
+</ion-content> -->

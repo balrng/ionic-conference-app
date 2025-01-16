@@ -2,26 +2,45 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs-page';
 import { SchedulePage } from '../schedule/schedule';
+import { DashboardPage } from '../dashboard/dashboard.page';
 
 
 const routes: Routes = [
+  // {
+  //   path: 'tabs',
+  //   component: TabsPage,
+  //   children: [
+  //     {
+  //       path: 'schedule',
+  //       children: [
+  //         {
+  //           path: '',
+  //           component: SchedulePage,
+  //         },
+  //         {
+  //           path: 'session/:sessionId',
+  //           loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+  //         }
+  //       ]
+  //     },
   {
     path: 'tabs',
     component: TabsPage,
     children: [
       {
-        path: 'schedule',
+        path: 'dashboard',
         children: [
           {
             path: '',
-            component: SchedulePage,
+            component: DashboardPage,
           },
           {
             path: 'session/:sessionId',
-            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+            loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)
           }
         ]
       },
+      
       {
         path: 'speakers',
         children: [
@@ -59,7 +78,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/app/tabs/schedule',
+        redirectTo: '/app/tabs/dashboard',
         pathMatch: 'full'
       }
     ]

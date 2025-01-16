@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 import { UserData } from '../../providers/user-data';
+import { TokenService } from '../../services/token.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class AccountPage implements AfterViewInit {
   constructor(
     public alertCtrl: AlertController,
     public router: Router,
-    public userData: UserData
+    public userData: UserData,
+    public tokenService: TokenService
   ) { }
 
   ngAfterViewInit() {
@@ -67,6 +69,7 @@ export class AccountPage implements AfterViewInit {
   }
 
   logout() {
+    this.tokenService.removeToken();
     this.userData.logout();
     this.router.navigateByUrl('/login');
   }

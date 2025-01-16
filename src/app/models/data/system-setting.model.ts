@@ -1,0 +1,31 @@
+export interface SystemSetting {
+  id?: number;
+  companyName?: string | null;
+  logoPhotoByte?: any[] | null; 
+  adminHeaderLogoByte?: any[] | null; 
+  adminHeaderDarkLogoByte?: any[] | null; 
+  adminLoginPageLogoByte?: any[] | null; 
+  adminLoginPageBgImageByte?: any[] | null; 
+  platformFaviconByte?: any[] | null; 
+  platformFaviconDarkByte?: any[] | null; 
+  loginFirstCaption?: string | null;
+  loginSecondCaption?: string | null;
+  googleApiKey?: string | null;
+  waslApiKey?: string | null;
+  enableSMTP?: boolean;
+  sMTP_HOST?: string | null;
+  sMTP_PORT?: number;
+  sMTP_IsSslEnabled?: boolean;
+  sMTP_Address?: string | null;
+  sMTP_DisplayName?: string | null;
+  sMTP_Password?: string | null;
+  enableSMS?: boolean;
+  sMS_GatewayURL?: string | null;
+  sMS_Password?: string | null;
+  sMS_Username?: string | null;
+  createdDate?: Date | null;
+  createdBy?: string | null;
+  updatedDate?: Date | null;
+  updatedBy?: string | null;
+  agentId?: number;
+}

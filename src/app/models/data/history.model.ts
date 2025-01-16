@@ -1,0 +1,32 @@
+export interface History {
+  id?: number;
+  vehicleId?: number;
+  iMEI?: string | null;
+  gPSDate?: Date;
+  alertCode?: number;
+  latitude?: number;
+  longitude?: number;
+  alitude?: number;
+  speed?: number;
+  direction?: number;
+  odometer?: number;
+  hDOP?: number;
+  satelliteCount?: number;
+  ignition?: boolean;
+  temperature1?: number | null;
+  temperature2?: number | null;
+  temperature3?: number | null;
+  temperature4?: number | null;
+  humidity1?: number | null;
+  humidity2?: number | null;
+  humidity3?: number | null;
+  humidity4?: number | null;
+  totalWeight?: number | null;
+  weightVolt?: number | null;
+  door1?: number | null;
+  door2?: number | null;
+  sos?: boolean | null;
+  sosPassenger?: boolean | null;
+  seat?: boolean | null;
+  numberOfPassengers?: number | null;
+}

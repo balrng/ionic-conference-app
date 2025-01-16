@@ -1,0 +1,47 @@
+import { DayOfWeekLookup } from "./day-of-week-lookup.model";
+import { Fleet } from "./fleet.model";
+import { Inventory } from "./inventory.model";
+import { ReportTypeLookup } from "./report-type-lookup.model";
+import { Warehouse } from "./warehouse.model";
+
+export interface ReportSchedule {
+  id?: number;
+  userId?: string | null;
+  fleetId?: number;
+  reportTypeLookupId?: number;
+  warehouseId?: number | null;
+  inventoryId?: number | null;
+  sensorSerial?: string | null;
+  alertTypeLookupId?: number | null;
+  name?: string | null;
+  newerToOlder?: boolean;
+  daily?: boolean | null;
+  weekly?: boolean | null;
+  monthly?: boolean | null;
+  yearly?: boolean | null;
+  dayOfWeekId?: number | null;
+  dayOfMonthId?: number | null;
+  dailyRepeat?: number | null;
+  weeklyRepeat?: number | null;
+  monthlyRepeat?: number | null;
+  dailyTime?: string | null;
+  weeklyTime?: string | null;
+  monthlyTime?: string | null;
+  emails?: string | null;
+  isActive?: boolean;
+  isEnglish?: boolean;
+  pDF?: boolean | null;
+  excel?: boolean | null;
+  groupUpdatesByType?: string | null;
+  groupUpdatesValue?: number | null;
+  isDeleted?: boolean;
+  createdDate?: Date | null;
+  createdBy?: string | null;
+  updatedDate?: Date | null;
+  updatedBy?: string | null;
+  fleet?: Fleet | null; 
+  warehouse?: Warehouse | null; 
+  inventory?: Inventory | null; 
+  reportTypeLookup?: ReportTypeLookup | null; 
+  daysOfWeekLookup?: DayOfWeekLookup | null; 
+}

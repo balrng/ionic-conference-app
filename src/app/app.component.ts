@@ -10,6 +10,7 @@ import { SplashScreen } from '@capacitor/splash-screen';
 import { Storage } from '@ionic/storage-angular';
 
 import { UserData } from './providers/user-data';
+import { TokenService } from './services/token.service';
 
 @Component({
   selector: 'app-root',
@@ -20,24 +21,27 @@ import { UserData } from './providers/user-data';
 export class AppComponent implements OnInit {
   appPages = [
     {
-      title: 'Schedule',
-      url: '/app/tabs/schedule',
+      title: 'Dashboard',
+      url: '/app/tabs/dashboard',
       icon: 'calendar'
     },
+    
     {
-      title: 'Speakers',
+      title: 'Alerts',
       url: '/app/tabs/speakers',
-      icon: 'people'
+      icon: 'alert-circle'
     },
     {
-      title: 'Map',
+      title: 'Reports',
       url: '/app/tabs/map',
-      icon: 'map'
+      
+      icon: 'document-text'
     },
+
     {
-      title: 'About',
+      title: 'Users',
       url: '/app/tabs/about',
-      icon: 'information-circle'
+      icon: 'people'
     }
   ];
   loggedIn = false;
@@ -51,6 +55,7 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
+    private tokenService: TokenService
   ) {
     this.initializeApp();
   }
@@ -118,7 +123,8 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/schedule');
+      this.tokenService.removeToken();
+      return this.router.navigateByUrl('/login');
     });
   }
 
