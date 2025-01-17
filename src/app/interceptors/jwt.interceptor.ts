@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { TokenService } from '../services/token.service';
 
+//functional component
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 
   const tokenService = inject(TokenService);
