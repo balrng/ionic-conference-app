@@ -10,6 +10,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: '*',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  {
     path: 'account',
     loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule),
     
@@ -30,6 +35,7 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule),
+    canActivate: [AuthGuard]
     
   },
   {

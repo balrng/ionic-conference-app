@@ -33,6 +33,19 @@ export class TokenService {
     localStorage.removeItem('jwt');
   }
 
+
+  public decodeToken(token): any | null {
+    const decodedToken: any = jwtDecode(token);
+
+    try {
+      return jwtDecode(token);
+    }
+
+    catch (error) {
+      return null;
+    }
+  }
+  
   public isTokenExpired(token?: string | null): boolean {
     if (!token) {
       token = this.getToken();
@@ -60,17 +73,18 @@ export class TokenService {
   // Diğer metodlar (getClaim, getUserRole) aynı kalabilir
 
   public login(credentials: LoginView): Observable<{ Token: string, RefreshToken: string }> {
-        return this.http.post<{ Token: string, RefreshToken: string }>(`${this.apiUrl}/api/v1/Account/Login`, credentials)
-            .pipe(
-                tap(response => {
-                    this.saveToken(response.Token);
-                    localStorage.setItem('refreshToken', response.RefreshToken);
-                })
-            );
-    }
-    
+    return this.http.post<{ Token: string, RefreshToken: string }>(`${this.apiUrl}/api/v1/Account/Login`, credentials)
+      .pipe(
+        tap(response => {
+          this.saveToken(response.Token);
+          localStorage.setItem('refreshToken', response.RefreshToken);
+        })
+      );
+  }
+
   public isAuthenticated(): boolean {
-        const token = this.getToken();
-        return token !== null && !this.isTokenExpired(token);
-    }
+    const token = this.getToken();
+    const result = token !== null && !this.isTokenExpired(token);
+    return result;
+  }
 }

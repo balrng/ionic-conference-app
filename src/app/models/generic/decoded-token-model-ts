@@ -1,0 +1,22 @@
+export interface DecodedToken {
+  nameid: string;
+  unique_name: string;
+  role: string;
+  given_name: string;
+  full_name: string;
+  agent_id: string;
+  fleet_id: string;
+  fleet_name: string;
+  fleet_name_en: string;
+  user_privileges_type_ids: string;
+  user_warehouses: string;
+  user_inventories: string;
+  user_sensors: string;
+  sub_admin_agent: string;
+  utc: string;
+  nbf: number;
+  exp: number;
+  iat: number;
+  iss: string;
+  aud: string;
+}

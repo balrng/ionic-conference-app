@@ -44,7 +44,7 @@ export interface LoginView{
   password: string | null ;
   //errorMsg?: string | null;
   rememberMe?: boolean | null;
-  captchaValue: string | null;
-  captchaCreatedValue: string | null;
-  utc:number;
+  captchaValue?: string | null;
+  captchaCreatedValue?: string | null;
+  utc?:number | null;
 }

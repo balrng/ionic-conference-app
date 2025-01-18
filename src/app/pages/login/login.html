@@ -20,7 +20,7 @@
         label="Username"
         labelPlacement="stacked"
         fill="solid"
-        [(ngModel)]="login.username"
+        [(ngModel)]="login.userName"
         name="username"
         type="text"
         #username="ngModel"
@@ -41,16 +41,21 @@
         errorText="Password is required"
         required>
       </ion-input>
+      <ion-row>
+        <span *ngIf="errorMsg != null" style="color: #ffb74b;">{{errorMsg}}</span>
+      </ion-row>
 
       <ion-row>
         <ion-col>
-          <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Login</ion-button>
+          <ion-button [disabled]="!loginForm.valid" (click)="onLogin(loginForm)" type="submit" expand="block" >Login</ion-button>
         </ion-col>
-        <ion-col>
-          <ion-button (click)="onSignup()" color="light" expand="block">Signup</ion-button>
-        </ion-col>
+        <!-- <ion-col>
+          <ion-button  color="light" expand="block">Forgot Password</ion-button>
+        </ion-col> -->
       </ion-row>
+      
     </form>
+    
   </div>
 
 </ion-content>
