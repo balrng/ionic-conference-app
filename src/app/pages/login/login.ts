@@ -9,6 +9,7 @@ import { TokenService } from '../../services/token.service';
 import { AuthService } from '../../services/auth.service';
 import { LoginView } from '../../models/data/user.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { JwtTokenHelper } from '../../services/auth-token';
 
 
 
@@ -23,10 +24,11 @@ export class LoginPage implements OnInit {
   submitted = false;
 
   constructor(
-    public userData: UserData,
-    public router: Router,
-    public tokenService:TokenService,
-    public authService:AuthService,
+    private userData: UserData,
+    private router: Router,
+    private tokenService:TokenService,
+    private authService:AuthService,
+    private tokenHelper:JwtTokenHelper
   ) { }
   ngOnInit(): void {
     if(this.tokenService.isAuthenticated())
@@ -45,9 +47,10 @@ export class LoginPage implements OnInit {
         (response:any) => {
           const token = response.token;
           this.tokenService.saveToken(token);
+          this.tokenHelper.setToken(token);
           this.userData.login(this.login.userName);
           this.router.navigateByUrl('/app/tabs/dashboard');
-          //this.router.navigateByUrl('/about');
+          
         },
         (error:HttpErrorResponse) => {
           console.error('Login error message:', error.error); //Alert use

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header >
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -10,14 +10,27 @@
 <ion-content>
   <div *ngIf="username" class="ion-padding-top ion-text-center">
     <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
-    <h2>{{username}}</h2>
+    
+    <h1>{{data.full_name}}</h1>
+    
+    
 
     <ion-list inset>
-      <ion-item (click)="updatePicture()">Update Picture</ion-item>
-      <ion-item (click)="changeUsername()">Change Username</ion-item>
+      <ion-item>User : {{data.unique_name}}</ion-item>
+      <ion-item>Role : {{data.role}}</ion-item>
+      <ion-item>Fleetname : {{data.fleet_name}}</ion-item>
+      <ion-item>Fleetname (En) : {{data.fleet_name_en}}</ion-item>
       <ion-item (click)="changePassword()">Change Password</ion-item>
-      <ion-item (click)="support()">Support</ion-item>
-      <ion-item (click)="logout()">Logout</ion-item>
+      
+
+      <!-- <ion-item (click)="updatePicture()">Update Picture</ion-item>-->
+      <!-- <ion-item (click)="changeUsername()">Change Username</ion-item>
+      <ion-item (click)="support()">Support</ion-item> -->
+      <ion-button color="danger" (click)="logout()" type="submit" expand="block"> 
+        <ion-icon slot="start" name="log-out"></ion-icon>
+        LOGOUT
+      </ion-button>
     </ion-list>
+    
   </div>
 </ion-content>

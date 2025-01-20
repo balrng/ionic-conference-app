@@ -5,6 +5,8 @@ import { AlertController } from '@ionic/angular';
 
 import { UserData } from '../../providers/user-data';
 import { TokenService } from '../../services/token.service';
+import { JwtTokenHelper } from '../../services/auth-token';
+import { DecodedToken } from '../../models/generic/decoded-token';
 
 
 @Component({
@@ -14,13 +16,17 @@ import { TokenService } from '../../services/token.service';
 })
 export class AccountPage implements AfterViewInit {
   username: string;
+  data:DecodedToken | null;
 
   constructor(
     public alertCtrl: AlertController,
     public router: Router,
     public userData: UserData,
-    public tokenService: TokenService
-  ) { }
+    public tokenService: TokenService,
+    private tokenhelper: JwtTokenHelper
+  ) { 
+     this.data = tokenhelper.getToken();
+  }
 
   ngAfterViewInit() {
     this.getUsername();

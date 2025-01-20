@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     {
       title: 'Dashboard',
       url: '/app/tabs/dashboard',
-      icon: 'calendar'
+      icon: 'home'
     },
     
     {

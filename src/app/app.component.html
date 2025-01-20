@@ -1,11 +1,12 @@
 <ion-app [class.ion-palette-dark]="dark">
   <ion-split-pane contentId="main-content">
 
-    <ion-menu contentId="main-content" *ngIf="loggedIn" >
-      <ion-content>
-        <ion-list lines="none">
+    <ion-menu contentId="main-content" *ngIf="loggedIn">
+      <ion-content >
+        <ion-list lines="none" >
           <ion-list-header>
-            TWWS
+              TWWS Mobile
+              
           </ion-list-header>
           <ion-menu-toggle autoHide="false" *ngFor="let p of appPages; let i = index">
             <ion-item [routerLink]="p.url" routerLinkActive="selected" routerDirection="root" detail="false">
@@ -19,9 +20,9 @@
         </ion-list>
 
         <ion-list *ngIf="loggedIn" lines="none">
-          <ion-list-header>
+          <!-- <ion-list-header>
             My Profile
-          </ion-list-header>
+          </ion-list-header> -->
 
           <ion-menu-toggle autoHide="false">
             <ion-item routerLink="/account" routerLinkActive="active" routerDirection="root" detail="false">

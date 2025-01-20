@@ -1,0 +1,31 @@
+.project-card-success {
+    fill: #fff;
+    background: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    padding: 11px;
+    border-radius: 5px;
+    box-shadow: 0 7px 30px rgba(11, 163, 96, 0.2)
+}
+
+.project-card-danger {
+    fill: #fff;
+    background: linear-gradient(45deg, #f53c5b, #fb768c);
+    padding: 11px;
+    border-radius: 5px;
+    box-shadow: 0 7px 30px rgba(250, 106, 130, 0.5);
+}
+
+.project-card-warning {
+    fill: #fff;
+    background-image: linear-gradient(45deg, #ff5858 0%, #f09819 100%);
+    padding: 11px;
+    border-radius: 5px;
+    box-shadow: 0 7px 30px rgba(241, 159, 93, 0.2);
+}
+
+.project-card-primary {
+    fill: #fff;
+    background: linear-gradient(45deg, #3858f9, #8e79fd);
+    padding: 11px;
+    border-radius: 5px;
+    box-shadow: 0 7px 30px rgba(128, 116, 252, 0.2);
+}
