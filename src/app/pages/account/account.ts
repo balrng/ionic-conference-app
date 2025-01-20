@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AlertController } from '@ionic/angular';
@@ -14,7 +14,7 @@ import { DecodedToken } from '../../models/generic/decoded-token';
   templateUrl: 'account.html',
   styleUrls: ['./account.scss'],
 })
-export class AccountPage implements AfterViewInit {
+export class AccountPage implements AfterViewInit,OnInit {
   username: string;
   data:DecodedToken | null;
 
@@ -27,9 +27,13 @@ export class AccountPage implements AfterViewInit {
   ) { 
      this.data = tokenhelper.getToken();
   }
+  ngOnInit(): void {
+    this.data = this.tokenhelper.getToken();
+  }
 
   ngAfterViewInit() {
     this.getUsername();
+    this.data = this.tokenhelper.getToken();
   }
 
   updatePicture() {
