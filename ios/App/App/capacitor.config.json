@@ -1,6 +1,6 @@
 {
-	"appId": "ionic.conference.app",
-	"appName": "ionic-conference-app",
+	"appId": "twms.mobile",
+	"appName": "twms.mobile",
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"plugins": {
