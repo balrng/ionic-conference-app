@@ -51,6 +51,27 @@ export class AboutPage implements OnInit {
     );
   }
 
+
+  handleRefresh(event: any) {
+    // Burada mevcut data yükleme metodunuzu çağırın
+    this.loadData().then(() => {
+      // Yükleme tamamlandığında refresher'ı kapatın
+      event.target.complete();
+    });
+  }
+
+  async loadData() {
+    this.userService.getIndex(this.tokenData.agent_id, this.tokenData.fleet_id).subscribe(
+      (response: any) => {
+        this.pageData = response;
+        this.itemcount = response.length;
+      },
+      (error: HttpErrorResponse) => {
+        console.error('Error:', error.error);
+      }
+    );
+  }
+
   async presentPopover(event: Event) {
     const popover = await this.popoverCtrl.create({
       component: PopoverPage,

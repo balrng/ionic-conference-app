@@ -47,6 +47,35 @@ export class SpeakerListPage {
         );
   }
 
+  handleRefresh(event: any) {
+    // Burada mevcut data yükleme metodunuzu çağırın
+    this.loadData().then(() => {
+      // Yükleme tamamlandığında refresher'ı kapatın
+      event.target.complete();
+    });
+  }
+
+
+  async loadData() {
+    const loggedInUserProfile = this.convertToLoggedInUserProfile(this.tokenData);
+    return new Promise((resolve) => {
+      this.customAlerService.getCustomAlerts(loggedInUserProfile.userId,
+        loggedInUserProfile.fleetId,
+        loggedInUserProfile.agentId)
+      .subscribe(
+        (response: any) => {
+          this.pageData = response;
+          resolve(true);
+        },
+        (error) => {
+          console.error('Error:', error);
+          resolve(false);
+        }
+      );
+    });
+  }
+
+
    private convertToLoggedInUserProfile(tokenData: DecodedToken): LoggedInUserProfile {
       return {
         userId: tokenData.nameid,

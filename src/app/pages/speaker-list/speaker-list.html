@@ -8,25 +8,35 @@
 </ion-header>
 
 
-<ion-content [fullscreen]="true" scrollX="true">
-  <ion-grid>
-    <ion-row class="header-row">
-      <ion-col size="2" *ngFor="let header of headers">
-        <span style="font-weight: bold;">{{ header }}</span>
-      </ion-col>
-    </ion-row>
 
-    <ion-row *ngFor="let alert of this.pageData?.data?.list" class="data-row">
-      <ion-col size="2">{{ alert?.title }}</ion-col>
-      <ion-col size="2">{{ alert.alertTypeLookupId == 2 ? 'Temperature Out Of Rang' : '' }}</ion-col>
-      <ion-col size="2">{{ alert.interval }}</ion-col>
-      <ion-col size="2">{{ alert.toEmails }}</ion-col>
-      <ion-col size="2">{{ alert.isActive ? 'Yes' : 'No' }}</ion-col>
-      
-      
+<ion-content [fullscreen]="true" scrollX="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circular"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="table-container">
+    <ion-grid>
+      <ion-row class="header-row">
+        <ion-col *ngFor="let header of headers">
+          <span style="font-weight: bold;">{{ header }}</span>
+        </ion-col>
       </ion-row>
-  </ion-grid>
+
+       <ion-row *ngFor="let alert of this.pageData?.data?.list" class="data-row">
+        <ion-col >{{ alert?.title }}</ion-col>
+        <ion-col >{{ alert.alertTypeLookupId == 2 ? 'Temperature Out Of Rang' : '' }}</ion-col>
+        <ion-col >{{ alert.interval }}</ion-col>
+        <ion-col >{{ alert.toEmails }}</ion-col>
+        <ion-col >{{ alert.isActive ? 'Yes' : 'No' }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
+
 
 <!-- <ion-content fullscreen="true">
   <ion-header collapse="condense">

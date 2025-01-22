@@ -1,8 +1,61 @@
-
-ion-grid {
-  width: 200vw; /* Grid'in genişliğini viewport genişliğinin 2 katı yapın */
+.table-container {
+  overflow-x: auto;
+  width: 100%;
 }
 
+ion-grid {
+  width: max-content; 
+  border: 1px solid #ddd; 
+  
+  ion-col {
+    min-width: 220px; 
+    width: 200px;
+    
+    &:last-child {
+      min-width: 150px;
+      width: 150px;
+    }
+  }
+  
+  .header-row {
+    border-bottom: 1px solid #ddd;
+    
+    ion-col {
+      border-left: 1px solid #ddd;
+      padding: 10px;
+      white-space: nowrap; 
+      
+      &:first-child {
+        border-left: none;
+      }
+    }
+  }
+
+  .data-row {
+    border-bottom: 1px solid #ddd;
+    
+    ion-col {
+      border-left: 1px solid #ddd;
+      padding: 10px;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      width: 200px;
+      
+      &:first-child {
+        border-left: none;
+      }
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+ion-content {
+  --overflow: auto; // İçeriğin kaydırılabilir olmasını sağlar
+}
 
 .header-row {
   //background-color: #f0f0f0; /* İsteğe bağlı arka plan rengi */

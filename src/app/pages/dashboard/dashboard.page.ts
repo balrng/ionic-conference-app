@@ -34,6 +34,8 @@ export class DashboardPage implements OnInit,AfterViewInit  {
     console.log('ExampleComponent execute ionViewDidLoad');
   }
   
+
+  
   ngOnInit() {
     console.log('DashboardPage ngOnInit');
     if (!this.tokenData) {
@@ -51,8 +53,30 @@ export class DashboardPage implements OnInit,AfterViewInit  {
       .add(() => {
         this.isLoading = false
       });
+  }
 
+  handleRefresh(event: any) {
+    // Burada mevcut data yükleme metodunuzu çağırın
+    this.loadData().then(() => {
+      // Yükleme tamamlandığında refresher'ı kapatın
+      event.target.complete();
+    });
+  }
 
+  async loadData() {
+    const loggedInUserProfile = this.convertToLoggedInUserProfile(this.tokenData);
+    return new Promise((resolve) => {
+      this.dashboardService.getAgentDashboard(loggedInUserProfile).subscribe(
+        (response: any) => {
+          this.pageData = response;
+          resolve(true);
+        },
+        (error) => {
+          console.error('Error:', error);
+          resolve(false);
+        }
+      );
+    });
   }
 
   private convertToLoggedInUserProfile(tokenData: DecodedToken): LoggedInUserProfile {

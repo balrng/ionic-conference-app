@@ -15,36 +15,17 @@
 
 
 <ion-content *ngIf="!isLoading">
-
-  <!-- 
-  <div style="padding-left: 10px;">
-    <ion-list ><span style="font-weight: bold;">Online</span>
-      <ion-item>Count:<ion-item> 
-     </ion-item>Percentage</ion-item>
-    </ion-list>
-  </div>
-
-  <div style="padding-left: 10px;padding-top: 10px;">
-    <ion-list ><span style="font-weight: bold;">Offline</span>
-      <ion-item>Count:<ion-item> 
-     </ion-item>Percentage</ion-item>
-    </ion-list>
-  </div>
-
-  <div style="padding-left: 10px;padding-top: 10px;">
-    <ion-list ><span style="font-weight: bold;">Disconencted</span>
-      <ion-item>Count:<ion-item> 
-     </ion-item>Percentage</ion-item>
-    </ion-list>
-  </div>
-
-  <div style="padding-left: 10px;padding-top: 10px;">
-    <ion-list ><span style="font-weight: bold;">Registered</span>
-      <ion-item>Count:<ion-item> 
-     </ion-item>Percentage</ion-item>
-    </ion-list>
-  </div> -->
-
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="chevron-down-circle-outline"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circular"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+  
+  
+  
 
   <div style="display: flex; flex-direction: row; justify-content: center;">
     <ion-card>

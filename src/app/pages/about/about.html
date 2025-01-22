@@ -7,22 +7,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" scrollX="true">
-  <ion-grid>
-    <ion-row class="header-row">
-      <ion-col size="2" *ngFor="let header of headers">
-        <span style="font-weight: bold;">{{ header }}</span>
-      </ion-col>
-    </ion-row>
-
-    <ion-row *ngFor="let user of pageData" class="data-row">
-      <ion-col size="2">{{ user.fleet.name }}</ion-col>
-      <ion-col size="2">{{ user.fleet.nameEn }}</ion-col>
-      <ion-col size="2">{{ user.userName }}</ion-col>
-      <ion-col size="2">{{ user.name }}</ion-col>
-      <ion-col size="2">{{ user.name }}</ion-col>
-      <ion-col size="2">{{ user?.isSubAdminAgent ? 'Admin' : 'Agent' }}</ion-col>
-      
+<ion-content [fullscreen]="true" scrollX="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circular"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="table-container">
+    <ion-grid>
+      <ion-row class="header-row">
+        <ion-col size="auto" *ngFor="let header of headers">
+          <span style="font-weight: bold;">{{ header }}</span>
+        </ion-col>
       </ion-row>
-  </ion-grid>
+
+      <ion-row *ngFor="let user of pageData" class="data-row">
+        <ion-col>{{ user?.fleet.name }}</ion-col>
+        <ion-col >{{ user?.fleet.nameEn }}</ion-col>
+        <ion-col >{{ user?.userName }}</ion-col>
+        <ion-col >{{ user?.name }}</ion-col>
+        <ion-col >{{ user?.expirationDate | date:'dd/MM/yyyy' }}</ion-col>
+        <ion-col >{{ user?.isSubAdminAgent ? 'Admin' : 'Agent' }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
