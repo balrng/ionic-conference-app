@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'twms.mobile',
-  appName: 'twms.mobile',
+  appName: 'Alrakeen TWMS',
   webDir: 'www',
   bundledWebRuntime: false,
   server: {

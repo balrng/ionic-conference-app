@@ -1,4 +1,4 @@
-package com.ionicframework.conferenceapp;
+package twms.mobile;
 
 import com.getcapacitor.BridgeActivity;
 
