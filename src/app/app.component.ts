@@ -27,16 +27,16 @@ export class AppComponent implements OnInit {
     },
     
     {
-      title: 'Alerts',
+      title: 'Custom Alerts',
       url: '/app/tabs/speakers',
       icon: 'alert-circle'
     },
-    {
-      title: 'Reports',
-      url: '/app/tabs/map',
+    // {
+    //   title: 'Reports',
+    //   url: '/app/tabs/map',
       
-      icon: 'document-text'
-    },
+    //   icon: 'document-text'
+    // },
 
     {
       title: 'Users',
@@ -58,6 +58,8 @@ export class AppComponent implements OnInit {
     private tokenService: TokenService
   ) {
     this.initializeApp();
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false; };
   }
 
   async ngOnInit() {
@@ -123,6 +125,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.userData.logout().then(() => {
+      
       this.tokenService.removeToken();
       return this.router.navigateByUrl('/login');
     });

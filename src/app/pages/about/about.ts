@@ -17,10 +17,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class AboutPage implements OnInit {
   location = 'austin';
   conferenceDate = '2025-05-17';
+  headers = ['CompanyName-Ar', 'CompanyName-En', 'Username', 'NameAr', 'Expr.Date', 'Role'];
 
   selectOptions = {
     header: 'Select a Location'
   };
+
+  itemcount:number = 0;
 
   tokenData: DecodedToken | null;
   pageData: User | null = null;
@@ -31,6 +34,7 @@ export class AboutPage implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('AboutPage ngOnInit');
     if (!this.tokenData) {
       console.error('Token not found');
       return;
@@ -39,6 +43,7 @@ export class AboutPage implements OnInit {
     this.userService.getIndex(this.tokenData.agent_id, this.tokenData.fleet_id).subscribe(
       (response: any) => {
         this.pageData = response;
+        this.itemcount = response.length;
       },
       (error: HttpErrorResponse) => {
         console.error('Error:', error.error);

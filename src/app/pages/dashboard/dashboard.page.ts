@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { JwtTokenHelper } from '../../services/auth-token';
 import { DecodedToken } from '../../models/generic/decoded-token';
 import { DashboardService } from '../../services/dashboard.service';
@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit,AfterViewInit  {
 
   tokenData: DecodedToken | null
   pageData : AgentDashboardView | null = null;
@@ -20,9 +20,20 @@ export class DashboardPage implements OnInit {
 
     this.tokenData = tokenhelper.getToken();
   }
+  ngAfterViewInit(): void {
+    console.log('ExampleComponent execute AfterViewInit');
+  }
 
+  ionViewWillEnter(){
+    console.log('ExampleComponent execute ionViewWillEnter');
+  }
+
+  ionViewDidLoad() {
+    console.log('ExampleComponent execute ionViewDidLoad');
+  }
+  
   ngOnInit() {
-
+    console.log('DashboardPage ngOnInit');
     if (!this.tokenData) {
       console.error('Token not found');
       return;

@@ -33,6 +33,7 @@ const routes: Routes = [
           {
             path: '',
             component: DashboardPage,
+            
           },
           {
             path: 'session/:sessionId',

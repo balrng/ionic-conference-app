@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AlertController } from '@ionic/angular';
@@ -23,17 +23,33 @@ export class AccountPage implements AfterViewInit,OnInit {
     public router: Router,
     public userData: UserData,
     public tokenService: TokenService,
-    private tokenhelper: JwtTokenHelper
+    private tokenhelper: JwtTokenHelper,
+    private cdRef: ChangeDetectorRef
   ) { 
-     this.data = tokenhelper.getToken();
+    //this.data = this.tokenhelper.getToken();
+    
   }
+  ionViewWillEnter(){
+    this.data = this.tokenhelper.getToken();
+    console.log('AccountPage execute ionViewWillEnter');
+  }
+
+  ionViewDidLoad() {
+    console.log('AccountPage execute ionViewDidLoad');
+  }
+
   ngOnInit(): void {
     this.data = this.tokenhelper.getToken();
+    console.log('my Profile');
+    console.log(this.data);
   }
 
   ngAfterViewInit() {
     this.getUsername();
     this.data = this.tokenhelper.getToken();
+    console.log('my Profile');
+    console.log(this.data);
+    this.cdRef.detectChanges();
   }
 
   updatePicture() {
@@ -79,9 +95,15 @@ export class AccountPage implements AfterViewInit,OnInit {
   }
 
   logout() {
-    this.tokenService.removeToken();
-    this.userData.logout();
-    this.router.navigateByUrl('/login');
+
+    this.userData.logout().then(() => {
+      this.tokenService.removeToken();
+      return this.router.navigateByUrl('/login');
+    });
+
+    // this.tokenService.removeToken();
+    // this.userData.logout();
+    // this.router.navigateByUrl('/login');
   }
 
   support() {

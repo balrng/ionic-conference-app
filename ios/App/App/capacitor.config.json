@@ -3,6 +3,9 @@
 	"appName": "twms.mobile",
 	"webDir": "www",
 	"bundledWebRuntime": false,
+	"server": {
+		"cleartext": true
+	},
 	"plugins": {
 		"SplashScreen": {
 			"launchShowDuration": 3000,

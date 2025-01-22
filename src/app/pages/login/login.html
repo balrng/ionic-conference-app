@@ -11,6 +11,7 @@
 <ion-content>
   <div class="login-logo">
     <img src="assets/img/logo.png" alt="Logo"> 
+    <!-- <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo"> -->
     
   </div>
 
@@ -42,16 +43,23 @@
         required>
       </ion-input>
       <ion-row>
-        <span *ngIf="errorMsg != null" style="color: #ffb74b;">{{errorMsg}}</span>
+        <span *ngIf="errorMsg != null" style="color: #ffb74b;">{{errorMsg?.title ?? errorMsg}}</span>
       </ion-row>
 
       <ion-row>
         <ion-col>
-          <ion-button [disabled]="!loginForm.valid" (click)="onLogin(loginForm)" type="submit" expand="block" >Login</ion-button>
+          <!-- <ion-button [disabled]="!loginForm.valid" (click)="onLogin(loginForm)" type="submit" expand="block" >Login</ion-button> -->
+          <ion-button [disabled]="!loginForm.valid" (click)="onLoginHttp(loginForm)" type="submit" expand="block" >Login Http</ion-button>
+          <!-- <ion-button [disabled]="!loginForm.valid" (click)="ontest(loginForm)" type="submit" expand="block" >test</ion-button> -->
         </ion-col>
         <!-- <ion-col>
           <ion-button  color="light" expand="block">Forgot Password</ion-button>
         </ion-col> -->
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>{{apiAdress}}</ion-label>
+        </ion-col>
       </ion-row>
       
     </form>

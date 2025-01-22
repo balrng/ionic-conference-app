@@ -6,15 +6,17 @@ import { IonicModule } from '@ionic/angular';
 import { AboutPage } from './about';
 import { PopoverPage } from '../about-popover/about-popover';
 import { AboutPageRoutingModule } from './about-routing.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        AboutPageRoutingModule
+        AboutPageRoutingModule,
+        ScrollingModule,
     ],
     declarations: [AboutPage, PopoverPage],
-    bootstrap: [AboutPage]
+    
 })
 export class AboutModule {}

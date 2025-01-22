@@ -1,101 +1,115 @@
-ion-toolbar {
-  --background: transparent;
-  --color: white;
-  position: absolute;
 
-  top: 0;
-  right: 0;
-  left: 0;
+ion-grid {
+  width: 200vw; /* Grid'in genişliğini viewport genişliğinin 2 katı yapın */
 }
 
-ion-toolbar ion-button,
-ion-toolbar ion-back-button,
-ion-toolbar ion-menu-button {
-  --color: white;
+
+.header-row {
+  //background-color: #f0f0f0; /* İsteğe bağlı arka plan rengi */
+  border-bottom: 1px solid #ddd; /* Alt çizgi */
 }
 
-.about-header {
-  position: relative;
-
-  width: 100%;
-  height: 30%;
+.data-row {
+  border-bottom: 1px solid #ddd; /* Alt çizgi */
 }
+// ion-toolbar {
+//   --background: transparent;
+//   --color: white;
+//   position: absolute;
 
-.about-header .about-image {
-  position: absolute;
+//   top: 0;
+//   right: 0;
+//   left: 0;
+// }
 
-  inset: 0;
+// ion-toolbar ion-button,
+// ion-toolbar ion-back-button,
+// ion-toolbar ion-menu-button {
+//   --color: white;
+// }
 
-  transition: opacity 500ms ease-in-out;
+// .about-header {
+//   position: relative;
 
-  background-repeat: no-repeat;
+//   width: 100%;
+//   height: 30%;
+// }
 
-  background-position: center;
-  background-size: cover;
+// .about-header .about-image {
+//   position: absolute;
 
-  opacity: 0;
-}
+//   inset: 0;
 
-.about-header .madison {
-  background-image: url("/assets/img/about/madison.jpg");
-}
+//   transition: opacity 500ms ease-in-out;
 
-.about-header .austin {
-  background-image: url("/assets/img/about/austin.jpg");
-}
+//   background-repeat: no-repeat;
 
-.about-header .chicago {
-  background-image: url("/assets/img/about/chicago.jpg");
-}
+//   background-position: center;
+//   background-size: cover;
 
-.about-header .seattle {
-  background-image: url("/assets/img/about/seattle.jpg");
-}
+//   opacity: 0;
+// }
 
-.about-info {
-  position: relative;
+// .about-header .madison {
+//   background-image: url("/assets/img/about/madison.jpg");
+// }
 
-  margin-top: -10px;
+// .about-header .austin {
+//   background-image: url("/assets/img/about/austin.jpg");
+// }
 
-  border-radius: 10px;
+// .about-header .chicago {
+//   background-image: url("/assets/img/about/chicago.jpg");
+// }
 
-  background: var(--ion-background-color, #ffffff);
+// .about-header .seattle {
+//   background-image: url("/assets/img/about/seattle.jpg");
+// }
 
-  z-index: 2; // display rounded border above header image
-}
+// .about-info {
+//   position: relative;
 
-.about-info h3 {
-  margin-top: 0;
-}
+//   margin-top: -10px;
 
-.about-info ion-list {
-  padding-top: 0;
-}
+//   border-radius: 10px;
 
-.about-info p {
-  color: var(--ion-color-dark);
+//   background: var(--ion-background-color, #ffffff);
 
-  line-height: 130%;
-}
+//   z-index: 2; // display rounded border above header image
+// }
 
-.about-info ion-icon {
-  margin-inline-end: 32px;
-}
+// .about-info h3 {
+//   margin-top: 0;
+// }
 
-#date-input-popover {
-  --offset-y: -var(--ion-safe-area-bottom);
-  --max-width: 90%;
-  --width: 336px;
-}
+// .about-info ion-list {
+//   padding-top: 0;
+// }
 
-/*
- * iOS Only
- */
+// .about-info p {
+//   color: var(--ion-color-dark);
 
-.ios .about-info {
-  --ion-padding: 19px;
-}
+//   line-height: 130%;
+// }
 
-.ios .about-info h3 {
-  font-weight: 700;
-}
+// .about-info ion-icon {
+//   margin-inline-end: 32px;
+// }
+
+// #date-input-popover {
+//   --offset-y: -var(--ion-safe-area-bottom);
+//   --max-width: 90%;
+//   --width: 336px;
+// }
+
+// /*
+//  * iOS Only
+//  */
+
+// .ios .about-info {
+//   --ion-padding: 19px;
+// }
+
+// .ios .about-info h3 {
+//   font-weight: 700;
+// }
