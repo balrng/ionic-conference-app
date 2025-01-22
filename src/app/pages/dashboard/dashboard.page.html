@@ -7,17 +7,16 @@
   </ion-toolbar>
 </ion-header>
 
-
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="medium">Dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
-
+<ion-content *ngIf="isLoading">
+  <div class="spinner-container">
+    <ion-spinner color="tertiary" name="lines"></ion-spinner>
+  </div>
+</ion-content>
 
 
-  <ion-content>
-    <!-- 
+<ion-content *ngIf="!isLoading">
+
+  <!-- 
   <div style="padding-left: 10px;">
     <ion-list ><span style="font-weight: bold;">Online</span>
       <ion-item>Count:<ion-item> 
@@ -55,23 +54,32 @@
       <ion-card-content>
         <div style="display: flex; flex-direction: row; justify-content: flex-start;">
           <div style="display: flex;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="project-card-success" height="60.2"
+            <svg xmlns="http://www.w3.org/2000/svg" class="project-card-success" height="60px" width="60px"
               enable-background="new 0 0 469.682 469.682" viewBox="0 0 640 512">
               <path
                 d="M0 488V171.3c0-26.2 15.9-49.7 40.2-59.4L308.1 4.8c7.6-3.1 16.1-3.1 23.8 0L599.8 111.9c24.3 9.7 40.2 33.3 40.2 59.4V488c0 13.3-10.7 24-24 24H568c-13.3 0-24-10.7-24-24V224c0-17.7-14.3-32-32-32H128c-17.7 0-32 14.3-32 32V488c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24zm488 24l-336 0c-13.3 0-24-10.7-24-24V432H512l0 56c0 13.3-10.7 24-24 24zM128 400V336H512v64H128zm0-96V224H512l0 80H128z">
               </path>
             </svg>
           </div>
-          <div style="padding-left:10px;display:  flex; flex-direction: column; justify-content: flex-start;">
-            <div style="display: flex; flex-direction: row; justify-content: space-between;"><ion-label>Total: </ion-label> <span>{{pageData?.warehousesCount}}</span></div> 
-            <div style="display: flex; flex-direction: row; justify-content: space-between;;"><ion-label>Active: </ion-label> <span>{{pageData?.activeWarehousesCount}}</span></div>
-            <div style="display: flex; flex-direction: row; justify-content: space-between;;"><ion-label>Inactive: </ion-label> <span>{{pageData?.inactiveWarehousesCount}}</span></div>
+          <div class="card-content">
+            <div class="metric-row">
+              <ion-label>Total</ion-label>
+              <span class="metric-value">{{pageData?.warehousesCount}}</span>
+            </div>
+            <div class="metric-row">
+              <ion-label>Active</ion-label>
+              <span class="metric-value">{{pageData?.activeWarehousesCount}}</span>
+            </div>
+            <div class="metric-row">
+              <ion-label>Inactive</ion-label>
+              <span class="metric-value">{{pageData?.inactiveWarehousesCount}}</span>
+            </div>
           </div>
         </div>
       </ion-card-content>
     </ion-card>
-  
-  
+
+
     <ion-card>
       <ion-card-header>
         <ion-card-title>Inventories</ion-card-title>
@@ -79,202 +87,292 @@
       <ion-card-content>
         <div style="display: flex; flex-direction: row; justify-content: flex-start;">
           <div style="display: flex;">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="60.2px" enable-background="new 0 0 438.891 438.891" baseProfile="tiny" viewBox="0 0 256 230" xml:space="preserve" 
-            class="project-card-warning"><path d="M61.2,106h37.4v31.2H61.2V106z M61.2,178.7h37.4v-31.2H61.2V178.7z M61.2,220.1h37.4v-31.2H61.2V220.1z M109.7,178.7H147  v-31.2h-37.4V178.7z M109.7,220.1H147v-31.2h-37.4V220.1z M158.2,188.9v31.2h37.4v-31.2H158.2z M255,67.2L128.3,7.6L1.7,67.4  l7.9,16.5l16.1-7.7v144h18.2V75.6h169v144.8h18.2v-144l16.1,7.5L255,67.2z"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="60px"
+              width="60px" enable-background="new 0 0 438.891 438.891" baseProfile="tiny" viewBox="0 0 256 230"
+              xml:space="preserve" class="project-card-warning">
+              <path
+                d="M61.2,106h37.4v31.2H61.2V106z M61.2,178.7h37.4v-31.2H61.2V178.7z M61.2,220.1h37.4v-31.2H61.2V220.1z M109.7,178.7H147  v-31.2h-37.4V178.7z M109.7,220.1H147v-31.2h-37.4V220.1z M158.2,188.9v31.2h37.4v-31.2H158.2z M255,67.2L128.3,7.6L1.7,67.4  l7.9,16.5l16.1-7.7v144h18.2V75.6h169v144.8h18.2v-144l16.1,7.5L255,67.2z">
+              </path>
+            </svg>
           </div>
-          <div style="padding-left:10px;display:  flex; flex-direction: column; justify-content: flex-start;">
-            <div style="display: flex; flex-direction: row; justify-content: space-between;"><ion-label>Total: </ion-label> <span>{{pageData?.inventoriesCount}}</span></div> 
-            <div style="display: flex; flex-direction: row; justify-content: space-between;;"><ion-label>Active: </ion-label> <span>{{pageData?.activeInventoriesCount}}</span></div>
-            <div style="display: flex; flex-direction: row; justify-content: space-between;;"><ion-label>Inactive: </ion-label> <span>{{pageData?.inactiveInventoriesCount}}</span></div>
+          <div class="card-content">
+            <div class="metric-row">
+              <ion-label>Total </ion-label><span class="metric-value">{{pageData?.inventoriesCount}}</span>
+            </div>
+            <div class="metric-row">
+              <ion-label>Active
+              </ion-label> <span class="metric-value">{{pageData?.activeInventoriesCount}}</span>
+            </div>
+            <div class="metric-row">
+              <ion-label>Inactive
+              </ion-label> <span class="metric-value">{{pageData?.inactiveInventoriesCount}}</span>
+            </div>
           </div>
         </div>
       </ion-card-content>
     </ion-card>
 
- 
-  
-</div>
 
-<div style="display: flex; flex-direction: row; justify-content: center;">
+
+  </div>
+
+  <div style="display: flex; flex-direction: row; justify-content: center;">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Gateways</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div style="display: flex; flex-direction: row; justify-content: flex-start;">
+          <div style="display: flex;">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="60px"
+              width="60px" version="1.1" x="0px" y="0px" viewBox="0 0 256 256"
+              enable-background="new 0 0 477.849 477.849" xml:space="preserve" class="project-card-success">
+              <g>
+                <g>
+                  <g>
+                    <path fill="#ffffff"
+                      d="M116.1,27.4c-14.3,2.7-25.9,9.1-36.3,20c-8.1,8.4-13.7,18.6-16.6,30.1c-1.1,4.4-1.3,6.9-1.3,15.7c0,9.2,0.2,11.1,1.6,16.4c3.1,11.4,8.5,20.9,16.7,29.4c6.9,7.1,12.2,10.8,15.4,10.8c3.2,0,5.7-1.6,6.9-4.4c1.6-4,0-7.3-5.3-10.9c-3.1-2-9.5-8.8-12.3-13.1c-13.7-20.8-10.8-48,6.9-65.3c25.6-25.1,68.1-17.2,83.1,15.6c3.4,7.4,4.2,11.4,4.2,21c0.1,9.7-0.9,14.1-4.2,21.6c-3.6,8-7.9,13.1-18.3,22.1c-5.4,4.7-2.3,12.6,5,12.6c3.1,0,7.8-3.4,14.8-10.8c7.9-8.4,12.8-17.3,16.2-29.8c1-3.9,1.3-6.4,1.3-15.4s-0.2-11.5-1.3-15.4c-3.7-13.6-8.5-22-18-31.4c-9.3-9.3-18.9-14.8-31.1-17.8C137,26.5,122.8,26.2,116.1,27.4z">
+                    </path>
+                    <path fill="#ffffff"
+                      d="M120.3,54.7c-14.1,2.8-26.6,15.1-29.5,29.2c-1.8,8.9-0.8,17.3,3.2,25.4c2.7,5.5,4.9,7.5,8.2,7.5c3.3,0,5.7-1.4,6.9-3.9c1.4-3,1.3-3.6-1.6-9.5c-2.6-5-2.6-5.4-2.6-11.1c0-5.1,0.2-6.3,1.7-9.5c2.3-4.9,7-9.6,11.7-11.8c3.3-1.5,4.5-1.7,9.6-1.7c5.1,0,6.3,0.2,9.5,1.7c4.9,2.3,9.6,7,11.8,11.7c1.5,3.3,1.7,4.5,1.7,9.6c0,5.7-0.1,6-2.7,11.3c-2.7,5.4-2.7,5.5-1.8,8c0.6,1.5,1.7,3,3,3.9c4,2.7,7.9,1.5,11.1-3.4c4.8-7.6,6.7-18.8,4.7-27.9c-3.1-14-14.3-25.5-28.3-29C133.1,54.1,124.5,53.9,120.3,54.7z">
+                    </path>
+                    <path fill="#ffffff"
+                      d="M123,87.6c-4.4,3-4.2,1.2-4.2,45.8v40h-41c-23.4,0-42.6,0.2-44.7,0.6c-7.7,1.2-16.1,6.9-19.5,13.3c-2.8,5.2-3.7,9.6-3.4,15.8c0.2,3.2,0.8,6.8,1.4,8.4c3.1,7.7,9.6,14,17.1,16.5l4.1,1.4h94.9c61.7,0,95.7-0.2,97.5-0.7c9.7-2.2,18.1-10.6,20.3-20.3c1.7-7.2,0.2-16.5-3.6-22.2c-4.2-6.4-11.6-11.1-19.2-12.2c-2.2-0.3-21.9-0.6-44-0.6h-40.1l-0.1-40.5c-0.2-40-0.2-40.6-1.5-42.3C133.4,85.9,127.4,84.6,123,87.6z M64.6,194c2.3,1.2,4.2,3.6,4.6,6.1c0.6,2.7-1.2,6.8-3.6,8.5c-1.8,1.3-2.6,1.4-14,1.5c-11.1,0.2-12.4,0.1-14.9-1c-2.3-1-3.1-1.8-4.1-4.1c-1.9-4.3-0.7-8.4,3.3-10.8c1.8-1.1,3.1-1.2,14.4-1.2C60.2,193.1,63.2,193.2,64.6,194z M195.6,194c4.1,2.1,5.7,6.4,4,10.6c-2.5,6.1-9.5,7.4-14.1,2.6c-2.2-2.3-2.8-6.8-1.3-9.8C186.2,193.6,191.6,191.9,195.6,194z M222.7,194.5c4.7,3.1,5.4,9.1,1.4,13c-3.6,3.6-8.6,3.4-12.2-0.3c-2.3-2.5-2.8-7.1-1.1-9.8C213.5,193.1,218.7,191.8,222.7,194.5z">
+                    </path>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="metric-row">
+              <ion-label>Total</ion-label><span class="metric-value">{{pageData?.gatewaysCount}}</span>
+            </div>
+            <div class="metric-row">
+              <ion-label>Active</ion-label> <span class="metric-value">{{pageData?.activeGatewaysCount}}</span>
+            </div>
+            <div class="metric-row">
+              <ion-label>Inactive</ion-label> <span class="metric-value">{{pageData?.inactiveGatewaysCount}}</span>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>UsersCount</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div style="display: flex; flex-direction: row; justify-content: flex-start;">
+          <div style="display: flex;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="60px" width="60px" enable-background="new 0 0 512 512"
+              xml:space="preserve" viewBox="0 0 640 512" class="project-card-warning">
+              <path
+                d="M211.2 96a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zM32 256c0 17.7 14.3 32 32 32h85.6c10.1-39.4 38.6-71.5 75.8-86.6c-9.7-6-21.2-9.4-33.4-9.4H96c-35.3 0-64 28.7-64 64zm461.6 32H576c17.7 0 32-14.3 32-32c0-35.3-28.7-64-64-64H448c-11.7 0-22.7 3.1-32.1 8.6c38.1 14.8 67.4 47.3 77.7 87.4zM391.2 226.4c-6.9-1.6-14.2-2.4-21.6-2.4h-96c-8.5 0-16.7 1.1-24.5 3.1c-30.8 8.1-55.6 31.1-66.1 60.9c-3.5 10-5.5 20.8-5.5 32c0 17.7 14.3 32 32 32h224c17.7 0 32-14.3 32-32c0-11.2-1.9-22-5.5-32c-10.8-30.7-36.8-54.2-68.9-61.6zM563.2 96a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zM321.6 192a80 80 0 1 0 0-160 80 80 0 1 0 0 160zM32 416c-17.7 0-32 14.3-32 32s14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32z">
+              </path>
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="metric-row">
+              <ion-label>Total: </ion-label><span class="metric-value">{{pageData?.usersCount}}</span>
+            </div>
+            <div class="metric-row">
+              <ion-label>Active:
+              </ion-label> <span class="metric-value">{{pageData?.activeGatewaysCount}}</span>
+            </div>
+            <div class="metric-row">
+              <ion-label>Inactive:
+              </ion-label> <span class="metric-value">{{pageData?.inactiveUsersCount}}</span>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Total Gateways</ion-card-title>
+      <ion-card-title>Device Statuses</ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <div style="display: flex; flex-direction: row; justify-content: flex-start;">
-        <div style="display: flex;">
-         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 256 256" enable-background="new 0 0 477.849 477.849" height="60.2px" xml:space="preserve" 
-         class="project-card-success"><g><g><g><path fill="#ffffff" d="M116.1,27.4c-14.3,2.7-25.9,9.1-36.3,20c-8.1,8.4-13.7,18.6-16.6,30.1c-1.1,4.4-1.3,6.9-1.3,15.7c0,9.2,0.2,11.1,1.6,16.4c3.1,11.4,8.5,20.9,16.7,29.4c6.9,7.1,12.2,10.8,15.4,10.8c3.2,0,5.7-1.6,6.9-4.4c1.6-4,0-7.3-5.3-10.9c-3.1-2-9.5-8.8-12.3-13.1c-13.7-20.8-10.8-48,6.9-65.3c25.6-25.1,68.1-17.2,83.1,15.6c3.4,7.4,4.2,11.4,4.2,21c0.1,9.7-0.9,14.1-4.2,21.6c-3.6,8-7.9,13.1-18.3,22.1c-5.4,4.7-2.3,12.6,5,12.6c3.1,0,7.8-3.4,14.8-10.8c7.9-8.4,12.8-17.3,16.2-29.8c1-3.9,1.3-6.4,1.3-15.4s-0.2-11.5-1.3-15.4c-3.7-13.6-8.5-22-18-31.4c-9.3-9.3-18.9-14.8-31.1-17.8C137,26.5,122.8,26.2,116.1,27.4z"></path> <path fill="#ffffff" d="M120.3,54.7c-14.1,2.8-26.6,15.1-29.5,29.2c-1.8,8.9-0.8,17.3,3.2,25.4c2.7,5.5,4.9,7.5,8.2,7.5c3.3,0,5.7-1.4,6.9-3.9c1.4-3,1.3-3.6-1.6-9.5c-2.6-5-2.6-5.4-2.6-11.1c0-5.1,0.2-6.3,1.7-9.5c2.3-4.9,7-9.6,11.7-11.8c3.3-1.5,4.5-1.7,9.6-1.7c5.1,0,6.3,0.2,9.5,1.7c4.9,2.3,9.6,7,11.8,11.7c1.5,3.3,1.7,4.5,1.7,9.6c0,5.7-0.1,6-2.7,11.3c-2.7,5.4-2.7,5.5-1.8,8c0.6,1.5,1.7,3,3,3.9c4,2.7,7.9,1.5,11.1-3.4c4.8-7.6,6.7-18.8,4.7-27.9c-3.1-14-14.3-25.5-28.3-29C133.1,54.1,124.5,53.9,120.3,54.7z"></path> <path fill="#ffffff" d="M123,87.6c-4.4,3-4.2,1.2-4.2,45.8v40h-41c-23.4,0-42.6,0.2-44.7,0.6c-7.7,1.2-16.1,6.9-19.5,13.3c-2.8,5.2-3.7,9.6-3.4,15.8c0.2,3.2,0.8,6.8,1.4,8.4c3.1,7.7,9.6,14,17.1,16.5l4.1,1.4h94.9c61.7,0,95.7-0.2,97.5-0.7c9.7-2.2,18.1-10.6,20.3-20.3c1.7-7.2,0.2-16.5-3.6-22.2c-4.2-6.4-11.6-11.1-19.2-12.2c-2.2-0.3-21.9-0.6-44-0.6h-40.1l-0.1-40.5c-0.2-40-0.2-40.6-1.5-42.3C133.4,85.9,127.4,84.6,123,87.6z M64.6,194c2.3,1.2,4.2,3.6,4.6,6.1c0.6,2.7-1.2,6.8-3.6,8.5c-1.8,1.3-2.6,1.4-14,1.5c-11.1,0.2-12.4,0.1-14.9-1c-2.3-1-3.1-1.8-4.1-4.1c-1.9-4.3-0.7-8.4,3.3-10.8c1.8-1.1,3.1-1.2,14.4-1.2C60.2,193.1,63.2,193.2,64.6,194z M195.6,194c4.1,2.1,5.7,6.4,4,10.6c-2.5,6.1-9.5,7.4-14.1,2.6c-2.2-2.3-2.8-6.8-1.3-9.8C186.2,193.6,191.6,191.9,195.6,194z M222.7,194.5c4.7,3.1,5.4,9.1,1.4,13c-3.6,3.6-8.6,3.4-12.2-0.3c-2.3-2.5-2.8-7.1-1.1-9.8C213.5,193.1,218.7,191.8,222.7,194.5z"></path></g></g></g></svg>
-        </div>
-        <div style="padding-left:10px;display:  flex; flex-direction: column; justify-content: flex-start;">
-          <div style="display: flex; flex-direction: row; justify-content: space-between;"><ion-label>Total: </ion-label> <span> {{pageData?.gatewaysCount}}</span></div> 
-          <div style="display: flex; flex-direction: row; justify-content: space-between;;"><ion-label>Active: </ion-label> <span> {{pageData?.activeGatewaysCount}}</span></div>
-          <div style="display: flex; flex-direction: row; justify-content: space-between;;"><ion-label>Inactive: </ion-label> <span> {{pageData?.inactiveGatewaysCount}}</span></div>
-        </div>
-      </div>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail class="thumbnail-custom" slot="start">
+            <svg xmlns="http://www.w3.org/2000/svg" height="51.2px" class="project-card-success"
+              enable-background="new 0 0 477.849 477.849" viewBox="0 0 32 32">
+              <path
+                d="M 13.90625 4.4375 L 13.03125 8.8125 L 10.84375 19.78125 L 9.96875 16.71875 L 9.75 16 L 9 16 L 4 16 L 4 18 L 8.25 18 L 10.03125 24.28125 L 11.15625 28.25 L 11.96875 24.1875 L 14.09375 13.53125 L 15.03125 17.25 L 15.21875 18 L 16 18 L 20.28125 18 C 20.627293 18.596896 21.260396 19 22 19 C 23.104569 19 24 18.104569 24 17 C 24 15.895431 23.104569 15 22 15 C 21.260396 15 20.627293 15.403104 20.28125 16 L 16.78125 16 L 14.96875 8.75 L 13.90625 4.4375 z M 22 11 L 22 13 C 24.27619 13 26 14.72381 26 17 C 26 19.27619 24.27619 21 22 21 L 22 23 C 25.32381 23 28 20.32381 28 17 C 28 13.67619 25.32381 11 22 11 z">
+              </path>
+            </svg>
+          </ion-thumbnail>
+
+
+          <div class="status-row-main">
+            <div class="status-row-inner">
+              <ion-label class="label-sm">Online </ion-label>
+              <span style="font-weight: bold;">({{pageData?.onlineDevicesCount}})</span>
+            </div>
+            <div class="status-row-inner">
+              <ion-label class="label-sm">Percentage</ion-label>
+              <span style="font-weight: bold;">({{ (pageData?.sensorsCount == 0 ? 0 :
+                pageData?.onlineDevicesCount / pageData?.sensorsCount) * 100 | number:'1.0-2' }}%)
+              </span>
+            </div>
+          </div>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail class="thumbnail-custom" slot="start">
+            <svg xmlns="http://www.w3.org/2000/svg" height="51.2px" class="project-card-danger"
+              enable-background="new 0 0 477.849 477.849" viewBox="0 0 32 32">
+              <path
+                d="M 13.90625 4.4375 L 13.03125 8.8125 L 10.84375 19.78125 L 9.96875 16.71875 L 9.75 16 L 9 16 L 4 16 L 4 18 L 8.25 18 L 10.03125 24.28125 L 11.15625 28.25 L 11.96875 24.1875 L 14.09375 13.53125 L 15.03125 17.25 L 15.21875 18 L 16 18 L 20.28125 18 C 20.627293 18.596896 21.260396 19 22 19 C 23.104569 19 24 18.104569 24 17 C 24 15.895431 23.104569 15 22 15 C 21.260396 15 20.627293 15.403104 20.28125 16 L 16.78125 16 L 14.96875 8.75 L 13.90625 4.4375 z M 22 11 L 22 13 C 24.27619 13 26 14.72381 26 17 C 26 19.27619 24.27619 21 22 21 L 22 23 C 25.32381 23 28 20.32381 28 17 C 28 13.67619 25.32381 11 22 11 z">
+              </path>
+            </svg>
+          </ion-thumbnail>
+
+          <div class="status-row-main">
+            <div class="status-row-inner">
+              <ion-label class="label-sm">Offline </ion-label>
+              <span style="font-weight: bold;">({{pageData?.offlineDevicesCount}})</span>
+            </div>
+            <div class="status-row-inner">
+              <ion-label class="label-sm">Percentage</ion-label>
+              <span style="font-weight: bold;">({{ (pageData?.sensorsCount == 0 ? 0 :
+                pageData?.offlineDevicesCount / pageData?.sensorsCount) * 100 | number:'1.0-2' }}%)
+              </span>
+            </div>
+          </div>
+
+        </ion-item>
+
+
+
+        <ion-item>
+          <ion-thumbnail class="thumbnail-custom" slot="start">
+            <svg xmlns="http://www.w3.org/2000/svg" height="51.2px" class="project-card-warning"
+              enable-background="new 0 0 477.849 477.849" viewBox="0 0 32 32">
+              <path
+                d="M 13.90625 4.4375 L 13.03125 8.8125 L 10.84375 19.78125 L 9.96875 16.71875 L 9.75 16 L 9 16 L 4 16 L 4 18 L 8.25 18 L 10.03125 24.28125 L 11.15625 28.25 L 11.96875 24.1875 L 14.09375 13.53125 L 15.03125 17.25 L 15.21875 18 L 16 18 L 20.28125 18 C 20.627293 18.596896 21.260396 19 22 19 C 23.104569 19 24 18.104569 24 17 C 24 15.895431 23.104569 15 22 15 C 21.260396 15 20.627293 15.403104 20.28125 16 L 16.78125 16 L 14.96875 8.75 L 13.90625 4.4375 z M 22 11 L 22 13 C 24.27619 13 26 14.72381 26 17 C 26 19.27619 24.27619 21 22 21 L 22 23 C 25.32381 23 28 20.32381 28 17 C 28 13.67619 25.32381 11 22 11 z">
+              </path>
+            </svg>
+          </ion-thumbnail>
+          <div class="status-row-main">
+            <div class="status-row-inner">
+              <ion-label class="label-sm">Disconnected </ion-label>
+              <span style="font-weight: bold;">({{pageData?.disconnectedDevicesCount}})</span>
+            </div>
+            <div class="status-row-inner">
+              <ion-label class="label-sm">Percentage</ion-label>
+              <span style="font-weight: bold;">({{ (pageData?.sensorsCount == 0 ? 0 :
+                pageData?.disconnectedDevicesCount / pageData?.sensorsCount) * 100 | number:'1.0-2' }}%)
+              </span>
+            </div>
+          </div>
+
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-thumbnail class="thumbnail-custom" slot="start">
+            <svg xmlns="http://www.w3.org/2000/svg" height="51.2px" class="project-card-primary"
+              enable-background="new 0 0 477.849 477.849" viewBox="0 0 32 32">
+              <path
+                d="M 13.90625 4.4375 L 13.03125 8.8125 L 10.84375 19.78125 L 9.96875 16.71875 L 9.75 16 L 9 16 L 4 16 L 4 18 L 8.25 18 L 10.03125 24.28125 L 11.15625 28.25 L 11.96875 24.1875 L 14.09375 13.53125 L 15.03125 17.25 L 15.21875 18 L 16 18 L 20.28125 18 C 20.627293 18.596896 21.260396 19 22 19 C 23.104569 19 24 18.104569 24 17 C 24 15.895431 23.104569 15 22 15 C 21.260396 15 20.627293 15.403104 20.28125 16 L 16.78125 16 L 14.96875 8.75 L 13.90625 4.4375 z M 22 11 L 22 13 C 24.27619 13 26 14.72381 26 17 C 26 19.27619 24.27619 21 22 21 L 22 23 C 25.32381 23 28 20.32381 28 17 C 28 13.67619 25.32381 11 22 11 z">
+              </path>
+            </svg>
+          </ion-thumbnail>
+
+
+          <div class="status-row-main">
+            <div class="status-row-inner">
+              <ion-label class="label-sm">Registered </ion-label>
+              <span style="font-weight: bold;">({{pageData?.registereddDevicesCount}})</span>
+            </div>
+            <div class="status-row-inner">
+              <ion-label class="label-sm">Percentage</ion-label>
+              <span style="font-weight: bold;">({{ (pageData?.sensorsCount == 0 ? 0 :
+                pageData?.registereddDevicesCount / pageData?.sensorsCount) * 100 | number:'1.0-2' }}%)
+              </span>
+            </div>
+          </div>
+
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>UsersCount</ion-card-title>
+      <ion-card-title>COMPANY INTEGRATION STATUS </ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <div style="display: flex; flex-direction: row; justify-content: flex-start;">
-        <div style="display: flex;">
-          <svg xmlns="http://www.w3.org/2000/svg" height="60.2px" enable-background="new 0 0 512 512" xml:space="preserve" viewBox="0 0 640 512" 
-           class="project-card-warning"><path d="M211.2 96a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zM32 256c0 17.7 14.3 32 32 32h85.6c10.1-39.4 38.6-71.5 75.8-86.6c-9.7-6-21.2-9.4-33.4-9.4H96c-35.3 0-64 28.7-64 64zm461.6 32H576c17.7 0 32-14.3 32-32c0-35.3-28.7-64-64-64H448c-11.7 0-22.7 3.1-32.1 8.6c38.1 14.8 67.4 47.3 77.7 87.4zM391.2 226.4c-6.9-1.6-14.2-2.4-21.6-2.4h-96c-8.5 0-16.7 1.1-24.5 3.1c-30.8 8.1-55.6 31.1-66.1 60.9c-3.5 10-5.5 20.8-5.5 32c0 17.7 14.3 32 32 32h224c17.7 0 32-14.3 32-32c0-11.2-1.9-22-5.5-32c-10.8-30.7-36.8-54.2-68.9-61.6zM563.2 96a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zM321.6 192a80 80 0 1 0 0-160 80 80 0 1 0 0 160zM32 416c-17.7 0-32 14.3-32 32s14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32z"></path></svg>
-        </div>
-        <div style="padding-left:10px;display:  flex; flex-direction: column; justify-content: flex-start;">
-          <div style="display: flex; flex-direction: row; justify-content: space-between;"><ion-label>Total: </ion-label> <span> {{pageData?.usersCount}}</span></div> 
-          <div style="display: flex; flex-direction: row; justify-content: space-between;;"><ion-label>Active: </ion-label> <span> {{pageData?.activeUsersCount}}</span></div>
-          <div style="display: flex; flex-direction: row; justify-content: space-between;;"><ion-label>Inactive: </ion-label> <span> {{pageData?.inactiveUsersCount}}</span></div>
-        </div>
-      </div>
+      <ion-list>
+        <ion-item>
+          <ion-label>Total <span style="font-weight: bold;">({{pageData?.waslItegratedCompany +
+              pageData?.waslNotItegratedCompany}})</span></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Integrated <span style="font-weight: bold;">({{pageData?.waslItegratedCompany}})</span></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Not Intigrated <span
+              style="font-weight: bold;">({{pageData?.waslNotItegratedCompany}})</span></ion-label>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
-</div>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Device Statuses</ion-card-title>
-        <ion-card-subtitle></ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-thumbnail slot="start">
-              <svg xmlns="http://www.w3.org/2000/svg" height="51.2px" class="project-card-success"
-                enable-background="new 0 0 477.849 477.849" viewBox="0 0 32 32">
-                <path
-                  d="M 13.90625 4.4375 L 13.03125 8.8125 L 10.84375 19.78125 L 9.96875 16.71875 L 9.75 16 L 9 16 L 4 16 L 4 18 L 8.25 18 L 10.03125 24.28125 L 11.15625 28.25 L 11.96875 24.1875 L 14.09375 13.53125 L 15.03125 17.25 L 15.21875 18 L 16 18 L 20.28125 18 C 20.627293 18.596896 21.260396 19 22 19 C 23.104569 19 24 18.104569 24 17 C 24 15.895431 23.104569 15 22 15 C 21.260396 15 20.627293 15.403104 20.28125 16 L 16.78125 16 L 14.96875 8.75 L 13.90625 4.4375 z M 22 11 L 22 13 C 24.27619 13 26 14.72381 26 17 C 26 19.27619 24.27619 21 22 21 L 22 23 C 25.32381 23 28 20.32381 28 17 C 28 13.67619 25.32381 11 22 11 z">
-                </path>
-              </svg>
-            </ion-thumbnail>
-            <ion-label>Online <span style="font-weight: bold;">({{pageData?.onlineDevicesCount}})</span></ion-label>
-            <ion-label>Percentage <span style="font-weight: bold;">({{ (pageData?.sensorsCount == 0 ? 0 :
-                pageData?.onlineDevicesCount / pageData?.sensorsCount) * 100 | number:'1.0-2' }}%)</span></ion-label>
-          </ion-item>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>WAREHOUSE INTEGRATION STATUS </ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Total <span style="font-weight: bold;">({{pageData?.waslLinkedWarehousesCount +
+              pageData?.waslNotLinkedWarehousesCount}})</span></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Integrated <span
+              style="font-weight: bold;">({{pageData?.waslLinkedWarehousesCount}})</span></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Not Integrated <span
+              style="font-weight: bold;">({{pageData?.waslNotLinkedWarehousesCount}})</span></ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-          <ion-item>
-            <ion-thumbnail slot="start">
-              <svg xmlns="http://www.w3.org/2000/svg" height="51.2px" class="project-card-danger"
-                enable-background="new 0 0 477.849 477.849" viewBox="0 0 32 32">
-                <path
-                  d="M 13.90625 4.4375 L 13.03125 8.8125 L 10.84375 19.78125 L 9.96875 16.71875 L 9.75 16 L 9 16 L 4 16 L 4 18 L 8.25 18 L 10.03125 24.28125 L 11.15625 28.25 L 11.96875 24.1875 L 14.09375 13.53125 L 15.03125 17.25 L 15.21875 18 L 16 18 L 20.28125 18 C 20.627293 18.596896 21.260396 19 22 19 C 23.104569 19 24 18.104569 24 17 C 24 15.895431 23.104569 15 22 15 C 21.260396 15 20.627293 15.403104 20.28125 16 L 16.78125 16 L 14.96875 8.75 L 13.90625 4.4375 z M 22 11 L 22 13 C 24.27619 13 26 14.72381 26 17 C 26 19.27619 24.27619 21 22 21 L 22 23 C 25.32381 23 28 20.32381 28 17 C 28 13.67619 25.32381 11 22 11 z">
-                </path>
-              </svg>
-            </ion-thumbnail>
-            <ion-label>Offline <span style="font-weight: bold;">({{pageData?.offlineDevicesCount}})</span></ion-label>
-            <ion-label>Percentage <span style="font-weight: bold;">({{ (pageData?.sensorsCount == 0 ? 0 :
-                pageData?.offlineDevicesCount / pageData?.sensorsCount) * 100 | number:'1.0-2' }}%)</span></ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-thumbnail slot="start">
-              <svg xmlns="http://www.w3.org/2000/svg" height="51.2px" class="project-card-warning"
-                enable-background="new 0 0 477.849 477.849" viewBox="0 0 32 32">
-                <path
-                  d="M 13.90625 4.4375 L 13.03125 8.8125 L 10.84375 19.78125 L 9.96875 16.71875 L 9.75 16 L 9 16 L 4 16 L 4 18 L 8.25 18 L 10.03125 24.28125 L 11.15625 28.25 L 11.96875 24.1875 L 14.09375 13.53125 L 15.03125 17.25 L 15.21875 18 L 16 18 L 20.28125 18 C 20.627293 18.596896 21.260396 19 22 19 C 23.104569 19 24 18.104569 24 17 C 24 15.895431 23.104569 15 22 15 C 21.260396 15 20.627293 15.403104 20.28125 16 L 16.78125 16 L 14.96875 8.75 L 13.90625 4.4375 z M 22 11 L 22 13 C 24.27619 13 26 14.72381 26 17 C 26 19.27619 24.27619 21 22 21 L 22 23 C 25.32381 23 28 20.32381 28 17 C 28 13.67619 25.32381 11 22 11 z">
-                </path>
-              </svg>
-            </ion-thumbnail>
-            <ion-label>Disconnected <span
-                style="font-weight: bold;">({{pageData?.disconnectedDevicesCount}})</span></ion-label>
-            <ion-label>Percentage <span style="font-weight: bold;">({{ (pageData?.sensorsCount == 0 ? 0 :
-                pageData?.disconnectedDevicesCount / pageData?.sensorsCount) * 100 | number:'1.0-2'
-                }}%)</span></ion-label>
-          </ion-item>
-
-          <ion-item lines="none">
-            <ion-thumbnail slot="start">
-              <svg xmlns="http://www.w3.org/2000/svg" height="51.2px" class="project-card-primary"
-                enable-background="new 0 0 477.849 477.849" viewBox="0 0 32 32">
-                <path
-                  d="M 13.90625 4.4375 L 13.03125 8.8125 L 10.84375 19.78125 L 9.96875 16.71875 L 9.75 16 L 9 16 L 4 16 L 4 18 L 8.25 18 L 10.03125 24.28125 L 11.15625 28.25 L 11.96875 24.1875 L 14.09375 13.53125 L 15.03125 17.25 L 15.21875 18 L 16 18 L 20.28125 18 C 20.627293 18.596896 21.260396 19 22 19 C 23.104569 19 24 18.104569 24 17 C 24 15.895431 23.104569 15 22 15 C 21.260396 15 20.627293 15.403104 20.28125 16 L 16.78125 16 L 14.96875 8.75 L 13.90625 4.4375 z M 22 11 L 22 13 C 24.27619 13 26 14.72381 26 17 C 26 19.27619 24.27619 21 22 21 L 22 23 C 25.32381 23 28 20.32381 28 17 C 28 13.67619 25.32381 11 22 11 z">
-                </path>
-              </svg>
-            </ion-thumbnail>
-            <ion-label>Registered <span
-                style="font-weight: bold;">({{pageData?.registereddDevicesCount}})</span></ion-label>
-            <ion-label>Percentage <span style="font-weight: bold;">({{ (pageData?.sensorsCount == 0 ? 0 :
-                pageData?.registereddDevicesCount / pageData?.sensorsCount) * 100 | number:'1.0-2'
-                }}%)</span></ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>COMPANY INTEGRATION STATUS </ion-card-title>
-        <ion-card-subtitle></ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label>Total <span style="font-weight: bold;">({{pageData?.waslItegratedCompany +
-                pageData?.waslNotItegratedCompany}})</span></ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Integrated <span
-                style="font-weight: bold;">({{pageData?.waslItegratedCompany}})</span></ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Not Intigrated <span
-                style="font-weight: bold;">({{pageData?.waslNotItegratedCompany}})</span></ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>WAREHOUSE INTEGRATION STATUS </ion-card-title>
-        <ion-card-subtitle></ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label>Total <span style="font-weight: bold;">({{pageData?.waslLinkedWarehousesCount +
-                pageData?.waslNotLinkedWarehousesCount}})</span></ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Integrated <span
-                style="font-weight: bold;">({{pageData?.waslLinkedWarehousesCount}})</span></ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Not Integrated <span
-                style="font-weight: bold;">({{pageData?.waslNotLinkedWarehousesCount}})</span></ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>INVENTORY INTEGRATION STATUS </ion-card-title>
-        <ion-card-subtitle></ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label>Total <span style="font-weight: bold;">({{pageData?.waslLinkedInventoriesCount +
-                pageData?.waslNotLinkedInventoriesCount}})</span></ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Integrated <span
-                style="font-weight: bold;">({{pageData?.waslLinkedInventoriesCount}})</span></ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Not Integrated <span
-                style="font-weight: bold;">({{pageData?.waslNotLinkedInventoriesCount}})</span></ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
-  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>INVENTORY INTEGRATION STATUS </ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Total <span style="font-weight: bold;">({{pageData?.waslLinkedInventoriesCount +
+              pageData?.waslNotLinkedInventoriesCount}})</span></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Integrated <span
+              style="font-weight: bold;">({{pageData?.waslLinkedInventoriesCount}})</span></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Not Integrated <span
+              style="font-weight: bold;">({{pageData?.waslNotLinkedInventoriesCount}})</span></ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
 
-  </ion-content>
+
+
+</ion-content>

@@ -37,10 +37,16 @@
         fill="solid"
         [(ngModel)]="login.password"
         name="password"
-        type="password"
+        [type]="showPassword ? 'text' : 'password'"
         #password="ngModel"
         errorText="Password is required"
         required>
+        <ion-icon 
+          [name]="showPassword ? 'eye-off' : 'eye'" 
+          slot="end" 
+          class="password-icon" 
+          (click)="toggleShowPassword()">
+        </ion-icon>
       </ion-input>
       <ion-row>
         <span *ngIf="errorMsg != null" style="color: #ffb74b;">{{errorMsg?.title ?? errorMsg}}</span>
@@ -48,17 +54,10 @@
 
       <ion-row>
         <ion-col>
-          <!-- <ion-button [disabled]="!loginForm.valid" (click)="onLogin(loginForm)" type="submit" expand="block" >Login</ion-button> -->
-          <ion-button [disabled]="!loginForm.valid" (click)="onLoginHttp(loginForm)" type="submit" expand="block" >Login Http</ion-button>
-          <!-- <ion-button [disabled]="!loginForm.valid" (click)="ontest(loginForm)" type="submit" expand="block" >test</ion-button> -->
-        </ion-col>
-        <!-- <ion-col>
-          <ion-button  color="light" expand="block">Forgot Password</ion-button>
-        </ion-col> -->
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-label>{{apiAdress}}</ion-label>
+          <ion-button [disabled]="!loginForm.valid || isLoading" (click)="onLogin(loginForm)" type="submit" expand="block">
+            <ion-spinner name="circular" *ngIf="isLoading"></ion-spinner>
+            <span *ngIf="!isLoading">Login</span>
+          </ion-button>
         </ion-col>
       </ion-row>
       

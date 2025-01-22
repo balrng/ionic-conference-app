@@ -16,7 +16,8 @@ export class DashboardPage implements OnInit,AfterViewInit  {
 
   tokenData: DecodedToken | null
   pageData : AgentDashboardView | null = null;
-  constructor(tokenhelper: JwtTokenHelper, private dashboardService: DashboardService) {
+  isLoading = true;
+  constructor(private tokenhelper: JwtTokenHelper, private dashboardService: DashboardService) {
 
     this.tokenData = tokenhelper.getToken();
   }
@@ -26,6 +27,7 @@ export class DashboardPage implements OnInit,AfterViewInit  {
 
   ionViewWillEnter(){
     console.log('ExampleComponent execute ionViewWillEnter');
+     this.tokenData = this.tokenhelper.getToken();
   }
 
   ionViewDidLoad() {
@@ -45,8 +47,10 @@ export class DashboardPage implements OnInit,AfterViewInit  {
       },
       (error:HttpErrorResponse) => {
         console.error('Error:', error.error); 
-      }
-    );
+      })
+      .add(() => {
+        this.isLoading = false
+      });
 
 
   }

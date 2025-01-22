@@ -30,6 +30,8 @@ export class LoginPage implements OnInit {
   submitted = false;
   apiAdress:string='';
   testData: any;
+  showPassword = false;
+  isLoading = false;
 
   constructor(
     private userData: UserData,
@@ -45,7 +47,7 @@ export class LoginPage implements OnInit {
   }
   ngOnInit(): void {
     if (this.tokenService.isAuthenticated()) {
-      //this.userData.login(this.login.userName);
+      
       this.router.navigateByUrl('/account');
     }
 
@@ -67,8 +69,12 @@ export class LoginPage implements OnInit {
      }
   }
 
-  onLoginHttp(form: NgForm) {
+  onLogin(form: NgForm) {
+    this.submitted = true;
     if (form.valid) {
+      this.isLoading = true;
+      this.errorMsg = null;
+
       this.authService.loginHttp(this.login).subscribe(
         (response: any) => {
           const token = response.token;
@@ -76,63 +82,21 @@ export class LoginPage implements OnInit {
           this.tokenHelper.setToken(token);
           this.userData.login(this.login.userName);
           this.router.navigateByUrl('/account');
-
         },
         (error: any) => {
           console.error('Login error message:', error.error); 
-          this.errorMsg = `${error.error} - ${error.statusText} - ${error.message} -  ${error.headers} - ${error.name} - ${error.status}`;
+          this.errorMsg = `${error.error}`;
         }
-      );
-     }
+      ).add(() => {
+        this.isLoading = false;
+      });
+    }
   }
-
-  onLogin(form: NgForm) {
-    this.submitted = true;
-
-    if (form.valid) {
-      this.authService.login(this.login).subscribe(
-        (response: any) => {
-          const token = response.token;
-          this.tokenService.saveToken(token);
-          this.tokenHelper.setToken(token);
-          this.userData.login(this.login.userName);
-          this.router.navigateByUrl('/account');
-
-        },
-        (error: any) => {
-          console.error('Login error message:', error.error); //Alert use
-          this.errorMsg = `${error.error} - ${error.statusText} - ${error.message} -  ${error.headers} - ${error.name} - ${error.status}`;
-        }
-      );
-     }
-    // else {
-
-    // }
-
-    // this.authService.getTestData().subscribe(
-    //   (data) => {
-    //     this.errorMsg = data;
-    //   },
-    //   (error) => {
-    //     console.error('API isteği hatası:', error);
-    //     this.errorMsg = `${error.error} - ${error.statusText} - ${error.message} -  ${error.headers} - ${error.name} - ${error.status}`;
-    //   }
-    // );
-
-    // this.authService.postTestData(this.newTodo).subscribe(
-    //   (data) => {
-    //     console.log('Yeni kayıt oluşturuldu:', data);
-    //     this.errorMsg = data;
-    //   },
-    //   (error) => {
-    //     console.error('API isteği hatası:', error);
-    //   }
-    // );
-
-  }
-  
-
   onSignup() {
     this.router.navigateByUrl('/signup');
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 }
