@@ -4,8 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://twmsapi.alrakeen.sa/api/v1',
-  //apiBaseUrl : 'http://twmsapi.alrakeen.sa/api/v1',
+  //apiBaseUrl: 'https://twmsapi.alrakeen.sa/api/v1',
+  apiBaseUrl : 'http://twmsapi.alrakeen.sa/api/v1',
 };
 
 /*
