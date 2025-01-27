@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "658762236816",
+    "project_id": "twws-notification",
+    "storage_bucket": "twws-notification.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658762236816:android:14be35a3804c5bce84a915",
+        "android_client_info": {
+          "package_name": "twms.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqkEZ9LDlfDZXyHTwh0iglreUaP2JJAiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
